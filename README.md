@@ -2,8 +2,4 @@
 
 ## Description
 
-Simple visualization for the A\* pathfinding algorithm using the pygame module for the gui.
-
-## Skills Learnt
-
-Implementation of algorithm in python.
+Simple visualization for the A* and Dijkstra pathfinding algorithms.
