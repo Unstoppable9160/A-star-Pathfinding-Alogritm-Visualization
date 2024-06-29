@@ -1,5 +1,6 @@
-# A\* Pathfinding Alogritm Visualization
+# Pathfinding Algs
 
 ## Description
-
-Simple visualization for the A* and Dijkstra pathfinding algorithms.
+Contains the following pathfinding algorithms:
+- A*
+- Dijkstra's
