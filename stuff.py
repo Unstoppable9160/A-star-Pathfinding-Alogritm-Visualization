@@ -1,4 +1,6 @@
+import time
 import pygame
+import threading
 
 BACKGROUND = (17, 16, 26)
 
@@ -12,6 +14,48 @@ BORDER_THINGY = (47, 46, 63)
 
 GRID_BORDERS = (0, 0, 0)
 
+
+
+class Stopwatch:
+    def __init__(self):
+        self.start_time = None
+        self.elapsed_time = 0
+        self.running = False
+        self._thread = None
+
+    def _run(self):
+        while self.running:
+            time.sleep(0.01)
+
+    def start(self):
+        if not self.running:
+            self.start_time = time.time() - self.elapsed_time
+            self.running = True
+            self._thread = threading.Thread(target=self._run)
+            self._thread.start()
+
+    def stop(self):
+        if self.running:
+            self.elapsed_time = time.time() - self.start_time
+            self.running = False
+            self._thread.join()
+
+    def reset(self):
+        self.stop()
+        self.start_time = None
+        self.elapsed_time = 0
+
+    def get_elapsed_time(self):
+        if self.running:
+            elapsed_time_secs = time.time() - self.start_time
+        else:
+            elapsed_time_secs = self.elapsed_time
+        
+        minutes = int(elapsed_time_secs // 60)
+        seconds = int(elapsed_time_secs % 60)
+        milliseconds = int((elapsed_time_secs - int(elapsed_time_secs)) * 1000)
+
+        return f"{minutes} minute(s) {seconds} second(s) {milliseconds} millisecond(s)"
 
 
 class Spot:

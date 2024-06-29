@@ -1,8 +1,9 @@
-from queue import PriorityQueue
 from stuff import *
+from queue import PriorityQueue
 
 WIDTH = 600
 WIN = pygame.display.set_mode((WIDTH, WIDTH))
+stopwatch = Stopwatch()
 pygame.display.set_caption("Dijkstra - Pathfinding Visualization")
 
 def reconstruct_path(came_from, current, draw):
@@ -30,6 +31,9 @@ def dijkstra(draw, grid, start, end):
         open_set_hash.remove(current)
 
         if current == end:
+            stopwatch.stop()
+            print(f"Elapsed Time: {stopwatch.get_elapsed_time()}")
+            stopwatch.reset()
             reconstruct_path(came_from, end, draw)
             end.make_end()
             return True
@@ -129,6 +133,7 @@ def main(win, width):
 
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_SPACE and start and end:
+                    stopwatch.start()
                     for row in grid:
                         for spot in row:
                             spot.update_neighbors(grid)
