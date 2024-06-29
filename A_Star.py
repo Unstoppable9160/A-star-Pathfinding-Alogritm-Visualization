@@ -1,3 +1,4 @@
+import os
 from stuff import *
 from queue import PriorityQueue
 
@@ -160,4 +161,5 @@ def main(win, width):
 
     pygame.quit()
 
+os.system("cls")
 main(WIN, WIDTH)
