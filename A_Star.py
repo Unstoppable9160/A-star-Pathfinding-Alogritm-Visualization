@@ -5,19 +5,16 @@ WIDTH = 600
 WIN = pygame.display.set_mode((WIDTH, WIDTH))
 pygame.display.set_caption("A* - Pathfinding Visualization")
 
-
 def h(p1, p2):
     x1, y1 = p1
     x2, y2 = p2
     return abs(x1 - x2) + abs(y1 - y2)
-
 
 def reconstruct_path(came_from, current, draw):
     while current in came_from:
         current = came_from[current]
         current.make_path()
         draw()
-
 
 def algorithm(draw, grid, start, end):
     count = 0
@@ -65,7 +62,6 @@ def algorithm(draw, grid, start, end):
 
     return False
 
-
 def make_grid(rows, width):
     grid = []
     gap = width // rows
@@ -77,14 +73,12 @@ def make_grid(rows, width):
 
     return grid
 
-
 def draw_grid(win, rows, width):
     gap = width // rows
     for i in range(rows):
         pygame.draw.line(win, GRID_BORDERS, (0, i * gap), (width, i * gap))
         for j in range(rows):
             pygame.draw.line(win, GRID_BORDERS, (j * gap, 0), (j * gap, width))
-
 
 def draw(win, grid, rows, width):
     win.fill(BACKGROUND)
@@ -96,7 +90,6 @@ def draw(win, grid, rows, width):
     draw_grid(win, rows, width)
     pygame.display.update()
 
-
 def get_clicked_pos(pos, rows, width):
     gap = width // rows
     y, x = pos
@@ -105,7 +98,6 @@ def get_clicked_pos(pos, rows, width):
     col = x // gap
 
     return row, col
-
 
 def main(win, width):
     ROWS = 30
@@ -121,7 +113,7 @@ def main(win, width):
             if event.type == pygame.QUIT:
                 run = False
 
-            if pygame.mouse.get_pressed()[0]:  # LEFT
+            if pygame.mouse.get_pressed()[0]:
                 pos = pygame.mouse.get_pos()
                 row, col = get_clicked_pos(pos, ROWS, width)
                 spot = grid[row][col]
@@ -136,7 +128,7 @@ def main(win, width):
                 elif spot != end and spot != start:
                     spot.make_barrier()
 
-            elif pygame.mouse.get_pressed()[2]:  # RIGHT
+            elif pygame.mouse.get_pressed()[2]:
                 pos = pygame.mouse.get_pos()
                 row, col = get_clicked_pos(pos, ROWS, width)
                 spot = grid[row][col]
