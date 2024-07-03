@@ -7,4 +7,5 @@ Contains the following pathfinding algorithms:
 
 ## Requirements
 Have pygame installed
+
 `python -m pip install pygame`
